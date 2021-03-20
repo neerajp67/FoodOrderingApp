@@ -6,34 +6,34 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/item1"
-            android:icon="@drawable/ic_home"
-            android:title="Top Headlines" />
+            android:icon="@drawable/ic_about"
+            android:title="About" />
 
         <item
             android:id="@+id/item2"
-            android:icon="@drawable/ic_home"
-            android:title="Sports" />
+            android:icon="@drawable/ic_order"
+            android:title="Favorite Order" />
 
         <item
             android:id="@+id/item3"
-            android:icon="@drawable/ic_home"
-            android:title="Technology" />
+            android:icon="@drawable/ic_baseline_payment_24"
+            android:title="Payments" />
 
         <item
             android:id="@+id/item4"
-            android:icon="@drawable/ic_home"
-            android:title="Entertainment" />
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
 
 
         <item
             android:id="@+id/item5"
-            android:icon="@drawable/ic_home"
-            android:title="Business" />
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Settings" />
 
         <item
             android:id="@+id/item6"
-            android:icon="@drawable/ic_home"
-            android:title="Health and Fitess" />
+            android:icon="@drawable/ic_baseline_notifications_active_24"
+            android:title="Notifications" />
 
     </group>
 
@@ -41,7 +41,7 @@
         <menu>
             <item
                 android:id="@+id/test1"
-                android:icon="@drawable/ic_home"
+                android:icon="@drawable/ic_home_black_24dp"
                 android:title="Share" />
 
         </menu>

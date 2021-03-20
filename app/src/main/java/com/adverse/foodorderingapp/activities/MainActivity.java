@@ -43,14 +43,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.bottom_nav_item1:
-                        Toast.makeText(MainActivity.this, "Bottom Nav item 1 selected", Toast.LENGTH_SHORT).show();
+                    case R.id.menu_home:
+                        Toast.makeText(MainActivity.this, "Bottom Nav home selected", Toast.LENGTH_SHORT).show();
                         return true;
-                    case R.id.bottom_nav_item2:
-                        Toast.makeText(MainActivity.this, "Bottom Nav item 2 selected", Toast.LENGTH_SHORT).show();
+                    case R.id.cart_view:
+                        Toast.makeText(MainActivity.this, "Bottom Nav cart_view selected", Toast.LENGTH_SHORT).show();
                         return true;
-                    case R.id.bottom_nav_item3:
-                        Toast.makeText(MainActivity.this, "Bottom Nav item 3 selected", Toast.LENGTH_SHORT).show();
+                    case R.id.search:
+                        Toast.makeText(MainActivity.this, "Bottom Nav search selected", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.account:
+                        Toast.makeText(MainActivity.this, "Bottom Nav account selected", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.login:
+                        Toast.makeText(MainActivity.this, "Bottom Nav login selected", Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return true;
@@ -118,27 +124,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    BottomNavigationView bottomNavigationView;
-    //    Bottom Nav Click Events
-    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.bottom_nav_item1:
-                            Toast.makeText(MainActivity.this, "Bottom Nav item 1 selected", Toast.LENGTH_SHORT).show();
-                            return true;
-                        case R.id.bottom_nav_item2:
-                            Toast.makeText(MainActivity.this, "Bottom Nav item 2 selected", Toast.LENGTH_SHORT).show();
-                            return true;
-                        case R.id.bottom_nav_item3:
-                            Toast.makeText(MainActivity.this, "Bottom Nav item 3 selected", Toast.LENGTH_SHORT).show();
-                            return true;
-                    }
-                    return true;
-                }
-            };
 
     //    To render search_menu
     @Override
