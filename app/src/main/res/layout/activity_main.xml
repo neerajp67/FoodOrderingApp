@@ -36,7 +36,7 @@
             app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <!--        Bottom Navigation Bar
             for background color change "android:background"
@@ -47,9 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@color/red"
-                app:itemTextColor="@color/bottomnav_selected_item_color"
                 app:itemIconTint="@color/bottomnav_selected_item_color"
                 app:itemRippleColor="@color/white"
+                app:itemTextColor="@color/bottomnav_selected_item_color"
                 app:menu="@menu/bottom_navigation" />
         </FrameLayout>
     </LinearLayout>
