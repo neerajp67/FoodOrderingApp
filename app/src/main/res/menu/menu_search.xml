@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:itemIconTint="@color/black">
+
+<!--    Top right menu: add item to be shown in the menu
+menu is inflated using onCreateOptionsMenu in MainActivity.java
+-->
+    <item android:id="@+id/search_keyword"
+        android:title="Search by Keyword"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.widget.SearchView"
+        />
+
+</menu>

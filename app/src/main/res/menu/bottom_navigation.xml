@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    Add items and change icons, title, id as per requirement -->
+    <item android:id="@+id/bottom_nav_item1"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+
+    <item android:id="@+id/bottom_nav_item2"
+        android:title="Cart"
+        android:icon="@drawable/ic_home"/>
+
+    <item android:id="@+id/bottom_nav_item3"
+        android:title="User"
+        android:icon="@drawable/ic_home"/>
+</menu>
