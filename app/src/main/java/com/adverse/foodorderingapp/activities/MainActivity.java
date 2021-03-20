@@ -3,9 +3,13 @@ package com.adverse.foodorderingapp.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ShareCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -130,6 +134,34 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_search, menu);
+        MenuItem searchViewItem = menu.findItem(R.id.search_keyword);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchViewItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchView.clearFocus();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                Change fragment name as required
+                final FragmentHome myFragment = new FragmentHome();
+
+//                Log.i("test date", searchView.getQuery().toString());
+                Bundle b = new Bundle();
+                b.putString("query", searchView.getQuery().toString());
+                myFragment.setArguments(b);
+//                Change fragment container wherever required
+                fragmentTransaction.replace(R.id.fragment_container, myFragment).commit();
+                searchView.onActionViewCollapsed();
+//                load fragment
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -23,7 +23,10 @@
                 android:layout_height="match_parent"
                 app:iss_auto_cycle="true"
                 app:iss_delay="0"
-                app:iss_period="3000" />
+                app:iss_period="3000"
+                app:iss_text_align="CENTER"
+                app:iss_selected_dot="@drawable/default_selected_dot"
+                app:iss_unselected_dot="@drawable/default_unselected_dot"/>
         </androidx.cardview.widget.CardView>
 
         <!--        content will be displayed here
