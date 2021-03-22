@@ -34,6 +34,7 @@
             android:layout_height="1dp"
             android:background="@color/red" />
 
+
         <!--        content will be displayed here
                     no need to change anything here -->
         <androidx.recyclerview.widget.RecyclerView
