@@ -7,42 +7,51 @@
 
     <EditText
         android:id="@+id/editName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
+
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editEmail"
+        app:layout_constraintBottom_toTopOf="@+id/etSignMobileNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.13" />
 
     <EditText
-        android:id="@+id/editEmail"
-        android:layout_width="wrap_content"
+        android:id="@+id/etSignMobileNumber"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Email"
+        android:hint="Mobile Number"
 
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editPass"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+
+        android:inputType="numberPassword"
+        app:layout_constraintBottom_toTopOf="@+id/SignMyPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <EditText
-        android:id="@+id/editPass"
-        android:layout_width="wrap_content"
+        android:id="@+id/SignMyPass"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
+
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/buttonAcount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/etSignMobileNumber" />
 
     <Button
         android:id="@+id/buttonAcount"
@@ -55,7 +64,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPass" />
+        app:layout_constraintTop_toBottomOf="@+id/SignMyPass" />
+    <TextView
+        android:id="@+id/AlreadyExists"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:text="Already existing Customer"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAcount" />
 
     <TextView
         android:id="@+id/textView"

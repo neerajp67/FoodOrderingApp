@@ -8,22 +8,27 @@
         android:gravity="center"
         android:orientation="vertical">
         <EditText
-            android:id="@+id/etemail"
-            android:layout_width="wrap_content"
+            android:id="@+id/etLoginMobileNumber"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
+            android:hint="Mobile Number"
 
             android:inputType="textEmailAddress"
             />
 
         <EditText
-            android:id="@+id/mypass"
-            android:layout_width="wrap_content"
+            android:id="@+id/LoginMyPass"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword"
+            android:inputType="numberPassword"
             />
         <Button
             android:id="@+id/btnlogin"
@@ -34,12 +39,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:id="@+id/createnewac"
+            android:id="@+id/forgetPassword"
+            android:textAllCaps="false"
+            android:layout_marginTop="10dp"
+
+            android:text="Forget password ? "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/createNewAcc"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:text="Create a new Acount!"
+
+            android:onClick="SignUp"
+            android:text="Create a new Account!"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
