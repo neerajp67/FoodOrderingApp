@@ -29,6 +29,11 @@
                 app:iss_unselected_dot="@drawable/default_unselected_dot"/>
         </androidx.cardview.widget.CardView>
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/red" />
+
         <!--        content will be displayed here
                     no need to change anything here -->
         <androidx.recyclerview.widget.RecyclerView
@@ -36,6 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"/>
+
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/red" />
+
 
         <!--        content will be displayed here
             no need to change anything here -->

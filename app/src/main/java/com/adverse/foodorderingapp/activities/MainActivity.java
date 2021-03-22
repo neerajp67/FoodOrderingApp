@@ -3,7 +3,7 @@ package com.adverse.foodorderingapp.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
+import android.widget.SearchView;
 import androidx.core.app.ShareCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.MenuItemCompat;
