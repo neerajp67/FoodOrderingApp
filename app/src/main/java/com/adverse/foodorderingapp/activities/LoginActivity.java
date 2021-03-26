@@ -1,5 +1,4 @@
 package com.adverse.foodorderingapp.activities;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,28 +14,28 @@ import android.widget.Toast;
 import com.adverse.foodorderingapp.R;
 import com.adverse.foodorderingapp.api.RetrofitClient;
 import com.adverse.foodorderingapp.models.LoginResponse;
-
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText etMobile, etpass;
-    Button loginButton;
+    EditText etLoginMobileNumber, etPassword;
+    TextView forgetPassword,createNewAcc;
+    Button buttonLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginButton = findViewById(R.id.btnlogin);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        buttonLogin = findViewById(R.id.buttonLogin);
+        etLoginMobileNumber=findViewById(R.id.etLoginMobileNumber);
+        etPassword=findViewById(R.id.etPassword);
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = "9874563210";
-                String password = "123";
+                String username = etLoginMobileNumber.getText().toString();
+                String password = etPassword.getText().toString();
                 String grant_type = "password";
 
                 Call<LoginResponse> call = RetrofitClient.getInstance().getApi().loginUser(username, password, grant_type);
@@ -64,6 +63,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void SignUp(View view) {
-        //startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+        startActivity(new Intent(LoginActivity.this, SignupActivity.class));
     }
 }

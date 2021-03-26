@@ -14,27 +14,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Mobile Number"
-
-            android:inputType="textEmailAddress"
+            android:hint="Enter your mobile number"
+            android:inputType="phone"
             />
 
         <EditText
-            android:id="@+id/LoginMyPass"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:ems="10"
-            android:hint="Password"
-            android:inputType="numberPassword"
+            android:hint="enter your password"
+            android:inputType="textPassword"
             />
         <Button
-            android:id="@+id/btnlogin"
+            android:id="@+id/buttonLogin"
             android:textAllCaps="false"
             android:layout_marginTop="10dp"
-
             android:text="Log In"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -42,7 +39,6 @@
             android:id="@+id/forgetPassword"
             android:textAllCaps="false"
             android:layout_marginTop="10dp"
-
             android:text="Forget password ? "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -52,7 +48,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="center"
-
             android:onClick="SignUp"
             android:text="Create a new Account!"
             android:layout_width="wrap_content"

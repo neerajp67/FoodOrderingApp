@@ -2,4 +2,9 @@
     <string name="app_name">Food Ordering App</string>>
     <string name="nav_open">nav_open</string>
     <string name="nav_close">nav_close</string>
+    <string-array name="numbers">
+        <item>one</item>
+        <item>two</item>
+
+    </string-array>
 </resources>

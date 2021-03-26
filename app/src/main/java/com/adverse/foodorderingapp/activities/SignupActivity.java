@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.adverse.foodorderingapp.R;
 
 public class SignupActivity extends AppCompatActivity {
-    EditText etMobile, etpass;
+    EditText etSignInName, etSignInPhone,SignInMyPassword,etConfirmPassword,buttonSignUp,createNewAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

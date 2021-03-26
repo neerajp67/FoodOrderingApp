@@ -3,6 +3,12 @@ package com.adverse.foodorderingapp.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SearchView;
 import androidx.core.app.ShareCompat;
 import androidx.core.view.GravityCompat;
@@ -15,6 +21,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +30,13 @@ import com.adverse.foodorderingapp.fragments.FragmentHome;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     //    Define global variable here
     androidx.appcompat.widget.Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigation;
+    Button btn1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +101,22 @@ public class MainActivity extends AppCompatActivity {
 //            selected fragment will be highlighted
             navigationView.setCheckedItem(R.id.item1);
         }
+
+/*
+
+        Spinner spinner =findViewById(R.id.spinner1);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.numbers, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+*/
+
+
+
     }
 
     //    Navigation Drawer: add functionality on navigation drawer item click..
@@ -170,5 +194,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
         return item.getItemId() == R.id.search_keyword;
+    }
+   public void FoodDesc(View view)
+   {
+
+   }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text=parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(),text,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
