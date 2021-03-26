@@ -1,6 +1,8 @@
 package com.adverse.foodorderingapp.activities;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin = findViewById(R.id.buttonLogin);
         etLoginMobileNumber=findViewById(R.id.etLoginMobileNumber);
         etPassword=findViewById(R.id.etPassword);
+        forgetPassword = findViewById(R.id.forgetPassword);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,10 +45,10 @@ public class LoginActivity extends AppCompatActivity {
                 call.enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        // LoginResponse loginResponse = new LoginResponse();
-                        Log.i("loginResponse", response.body().getAccessToken());
-                        Toast.makeText(LoginActivity.this, "Access Token: " + response.body().getAccessToken(),
-                                Toast.LENGTH_LONG).show();
+//                        Log.i("Response ", response.toString());
+//                        Log.i("loginResponse", response.body().getAccessToken());
+//                        Toast.makeText(LoginActivity.this, "Access Token: " + response.body().getAccessToken(),
+//                                Toast.LENGTH_LONG).show();
 
 //                        Log.i("Response access token", s + loginResponse.getAccessToken());
 //                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -58,6 +61,37 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText resetPhone = new EditText(LoginActivity.this);
+                AlertDialog.Builder resetPassword = new AlertDialog.Builder(LoginActivity.this);
+
+                resetPassword.setTitle("Forget Password!")
+                        .setMessage("Please enter your login phone number to reset the password..")
+                        .setView(resetPhone)
+                        .setCancelable(false)
+                        .setPositiveButton("Reset Password", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String userPhone = resetPhone.getText().toString();
+                                if(TextUtils.isEmpty(userPhone)){
+                                    resetPhone.setError("Please enter your registered mobile number");
+                                    Toast.makeText(LoginActivity.this, "Please enter your registered mobile number!", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                Toast.makeText(LoginActivity.this, "reset test", Toast.LENGTH_SHORT).show();
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                resetPassword.create().show();
             }
         });
     }

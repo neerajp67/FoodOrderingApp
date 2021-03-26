@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.SignupActivity">
 
-
     <View
         android:id="@+id/header_view"
         android:layout_width="match_parent"
@@ -35,5 +34,4 @@
             android:layout_height="200dp"
             android:background="@drawable/bottom_bg" />
     </LinearLayout>
-
 </RelativeLayout>
