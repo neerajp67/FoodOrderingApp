@@ -13,11 +13,19 @@ import android.widget.TextView;
 import com.adverse.foodorderingapp.R;
 
 public class SignupActivity extends AppCompatActivity {
-    EditText etSignInName, etSignInPhone,SignInMyPassword,etConfirmPassword,buttonSignUp,createNewAccount;
+    EditText etSignInName, etSignInPhone, SignInMyPassword, etConfirmPassword, buttonSignUp, createNewAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+    }
+
+
+    public void OpenLoginActivity(View view) {
+
+        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+
+        finish();
     }
 }

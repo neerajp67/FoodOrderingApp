@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.adverse.foodorderingapp.R;
 import com.adverse.foodorderingapp.api.RetrofitClient;
 import com.adverse.foodorderingapp.models.LoginResponse;
@@ -22,7 +21,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     EditText etLoginMobileNumber, etPassword;
-    TextView forgetPassword,createNewAcc;
+    TextView forgetPassword;
     Button buttonLogin;
 
     @Override
@@ -51,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 //                                Toast.LENGTH_LONG).show();
 
 //                        Log.i("Response access token", s + loginResponse.getAccessToken());
-//                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
 
                     @Override
@@ -98,5 +97,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void SignUp(View view) {
         startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+
     }
 }
