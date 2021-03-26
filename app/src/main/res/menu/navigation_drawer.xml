@@ -11,28 +11,28 @@
 
         <item
             android:id="@+id/item2"
-            android:icon="@drawable/ic_order"
+            android:icon="@drawable/ic_favorate"
             android:title="Favorite Order" />
 
         <item
             android:id="@+id/item3"
-            android:icon="@drawable/ic_baseline_payment_24"
+            android:icon="@drawable/ic_payment_card"
             android:title="Payments" />
 
         <item
             android:id="@+id/item4"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/ic_home_black"
             android:title="Home" />
 
 
         <item
             android:id="@+id/item5"
-            android:icon="@drawable/ic_baseline_settings_24"
+            android:icon="@drawable/ic_settings"
             android:title="Settings" />
 
         <item
             android:id="@+id/item6"
-            android:icon="@drawable/ic_baseline_notifications_active_24"
+            android:icon="@drawable/ic_notifications_active"
             android:title="Notifications" />
 
     </group>
@@ -41,7 +41,7 @@
         <menu>
             <item
                 android:id="@+id/test1"
-                android:icon="@drawable/ic_home_black_24dp"
+                android:icon="@drawable/ic_home_black"
                 android:title="Share" />
 
         </menu>
