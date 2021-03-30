@@ -3,8 +3,10 @@ package com.adverse.foodorderingapp.activities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etLoginMobileNumber, etPassword;
     TextView forgetPassword;
     Button buttonLogin;
-
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         etLoginMobileNumber = findViewById(R.id.etLoginMobileNumber);
         etPassword = findViewById(R.id.etPassword);
         forgetPassword = findViewById(R.id.forgetPassword);
+
+        sharedPreferences = getApplicationContext().getSharedPreferences("com.adverse.foodorderingapp", Context.MODE_PRIVATE);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.i("Response ", response.toString());
                             Log.i("loginResponse", response.body().getAccessToken());
 
+                            sharedPreferences.edit().putString("access_token", response.body().getAccessToken()).apply();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
                         } else {
