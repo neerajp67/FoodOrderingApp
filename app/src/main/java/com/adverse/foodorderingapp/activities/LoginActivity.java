@@ -1,4 +1,5 @@
 package com.adverse.foodorderingapp.activities;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.adverse.foodorderingapp.R;
 import com.adverse.foodorderingapp.api.RetrofitClient;
 import com.adverse.foodorderingapp.models.LoginResponse;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,28 +32,37 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         buttonLogin = findViewById(R.id.buttonLogin);
-        etLoginMobileNumber=findViewById(R.id.etLoginMobileNumber);
-        etPassword=findViewById(R.id.etPassword);
+        etLoginMobileNumber = findViewById(R.id.etLoginMobileNumber);
+        etPassword = findViewById(R.id.etPassword);
         forgetPassword = findViewById(R.id.forgetPassword);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = etLoginMobileNumber.getText().toString();
-                String password = etPassword.getText().toString();
+                //for demo
+                String username = "admin";
+                String password = "admin";
+
+                //actual code
+//                String username = etLoginMobileNumber.getText().toString();
+//                String password = etPassword.getText().toString();
+
                 String grant_type = "password";
 
                 Call<LoginResponse> call = RetrofitClient.getInstance().getApi().loginUser(username, password, grant_type);
                 call.enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-//                        Log.i("Response ", response.toString());
-//                        Log.i("loginResponse", response.body().getAccessToken());
-//                        Toast.makeText(LoginActivity.this, "Access Token: " + response.body().getAccessToken(),
-//                                Toast.LENGTH_LONG).show();
 
-//                        Log.i("Response access token", s + loginResponse.getAccessToken());
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        if (String.valueOf(response.code()).equals("200")) {
+                            Log.i("Response ", response.toString());
+                            Log.i("loginResponse", response.body().getAccessToken());
+
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                        } else {
+                            Log.i("Response ", "Error");
+                        }
                     }
 
                     @Override
@@ -77,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String userPhone = resetPhone.getText().toString();
-                                if(TextUtils.isEmpty(userPhone)){
+                                if (TextUtils.isEmpty(userPhone)) {
                                     resetPhone.setError("Please enter your registered mobile number");
                                     Toast.makeText(LoginActivity.this, "Please enter your registered mobile number!", Toast.LENGTH_SHORT).show();
                                     return;
