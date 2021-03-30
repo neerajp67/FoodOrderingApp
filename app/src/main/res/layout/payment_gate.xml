@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/placeorder"
+        android:layout_margin="5dp"
+        android:background="@color/red"
+        android:padding="5dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/codavailable"
+        android:layout_margin="5dp"
+        android:background="@color/red"
+        android:padding="5dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Item Price"/>
+            <TextView
+                android:id="@+id/itemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35dp"
+                android:layout_marginLeft="140dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="₹150.6"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Tax and Delivery"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextPrice"
+                android:textSize="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="70dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="₹50.4"/>
+
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="Total Amount"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TotalAmount"
+                    android:textSize="35dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="120dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="₹201"/>
+
+            </LinearLayout>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/payNow"
+                android:scaleType="fitCenter"
+                android:src="@drawable/paynow"
+                android:layout_margin="5dp"
+                android:padding="5dp"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/thanks"
+                android:layout_margin="5dp"
+                android:padding="5dp"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
