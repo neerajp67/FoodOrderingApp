@@ -3,7 +3,7 @@ package com.adverse.foodorderingapp.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CategoryResponseModel {
+public class MealCategoryModel {
 
     @SerializedName("Id")
     @Expose

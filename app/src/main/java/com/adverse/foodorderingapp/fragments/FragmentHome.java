@@ -1,7 +1,7 @@
 package com.adverse.foodorderingapp.fragments;
 
+import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,18 +12,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adverse.foodorderingapp.R;
-import com.adverse.foodorderingapp.activities.LoginActivity;
-import com.adverse.foodorderingapp.activities.MainActivity;
 import com.adverse.foodorderingapp.adapter.MealCategoryAdapter;
 import com.adverse.foodorderingapp.api.RetrofitClient;
-import com.adverse.foodorderingapp.models.CategoryResponseModel;
-import com.adverse.foodorderingapp.models.LoginResponse;
+import com.adverse.foodorderingapp.models.MealCategoryModel;
 import com.adverse.foodorderingapp.models.MealCategoriesResponseModel;
 import com.adverse.foodorderingapp.utils.OnRecyclerViewItemClickListener;
 import com.denzcoskun.imageslider.ImageSlider;
@@ -37,8 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentHome extends Fragment implements OnRecyclerViewItemClickListener{
-
+public class FragmentHome extends Fragment implements OnRecyclerViewItemClickListener {
     //    to get Activity/Application Context
     Context context;
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
@@ -55,7 +51,6 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
 
 //        getting fragment layout file to be rendered
         View view = inflater.inflate(R.layout.fragment_home, container, false);
@@ -89,9 +84,9 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
                 try {
                     if (String.valueOf(response.code()).equals("200")) {
                         Log.i("Response ", response.toString());
-                        List<CategoryResponseModel> categoryResponseModelList = response.body().getCategoryList();
-                        if (categoryResponseModelList.size() > 0) {
-                            final MealCategoryAdapter mealCategoryAdapter = new MealCategoryAdapter(categoryResponseModelList);
+                        List<MealCategoryModel> mealCategoryModelList = response.body().getCategoryList();
+                        if (mealCategoryModelList.size() > 0) {
+                            final MealCategoryAdapter mealCategoryAdapter = new MealCategoryAdapter(mealCategoryModelList);
                             mealCategoryAdapter.setOnRecyclerViewItemClickListener(FragmentHome.this);
                             recyclerViewVertical.setAdapter(mealCategoryAdapter);
                             // progressDialog.dismiss();
@@ -124,13 +119,18 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
     public void onItemClick(int adapterPosition, View view) {
         switch (view.getId()) {
             case R.id.food_category_adapter_layout:
-                CategoryResponseModel categoryResponseModel = (CategoryResponseModel) view.getTag();
-                if (!TextUtils.isEmpty(categoryResponseModel.getName())) {
-                    Log.e("clicked category", categoryResponseModel.getName());
-                    Toast.makeText(context, "Selected :" + categoryResponseModel.getName(), Toast.LENGTH_SHORT).show();
-                   // Intent webActivity = new Intent(context, WebActivity.class);
-                    //webActivity.putExtra("url", article.getUrl());
-                   // startActivity(webActivity);
+                MealCategoryModel mealCategoryModel = (MealCategoryModel) view.getTag();
+
+                if (!TextUtils.isEmpty(mealCategoryModel.getCode())) {
+                    Log.e("clicked category", mealCategoryModel.getCode());
+
+                    FragmentTransaction t = this.getFragmentManager().beginTransaction();
+                    Fragment fragmentCategoryProduct = new FragmentCategoryProduct();
+                    String backStackFragmentCategoryProduct = fragmentCategoryProduct.getClass().getName();
+                    Bundle b = new Bundle();
+                    b.putString("mealCategoryCode", mealCategoryModel.getCode());
+                    fragmentCategoryProduct.setArguments(b);
+                    t.replace(R.id.fragment_container, fragmentCategoryProduct).addToBackStack(backStackFragmentCategoryProduct).commit();
                 }
                 break;
         }

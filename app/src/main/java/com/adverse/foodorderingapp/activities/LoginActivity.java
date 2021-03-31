@@ -39,6 +39,16 @@ public class LoginActivity extends AppCompatActivity {
         forgetPassword = findViewById(R.id.forgetPassword);
 
         sharedPreferences = getApplicationContext().getSharedPreferences("com.adverse.foodorderingapp", Context.MODE_PRIVATE);
+        String accessToken = null;
+       try{
+           accessToken =  sharedPreferences.getString("access_token", "default token");
+       } catch (Exception e){
+           Log.e("Error ", "No access token");
+       }
+       if (!accessToken.isEmpty()){
+           startActivity(new Intent(LoginActivity.this, MainActivity.class));
+           finish();
+       }
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override

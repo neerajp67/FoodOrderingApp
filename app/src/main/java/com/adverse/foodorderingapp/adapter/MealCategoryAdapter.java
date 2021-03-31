@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adverse.foodorderingapp.R;
-import com.adverse.foodorderingapp.models.CategoryResponseModel;
+import com.adverse.foodorderingapp.models.MealCategoryModel;
 import com.adverse.foodorderingapp.utils.GlideApp;
 import com.adverse.foodorderingapp.utils.OnRecyclerViewItemClickListener;
 
@@ -21,13 +21,11 @@ import java.util.List;
 
 public class MealCategoryAdapter extends RecyclerView.Adapter<MealCategoryAdapter.ViewHolder> {
 
-    private List<CategoryResponseModel> categoryResponseModelList;
-    //    private Context context;
-  
+    private List<MealCategoryModel> mealCategoryModelList;
     private Context context;
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
-    public MealCategoryAdapter( List<CategoryResponseModel> categoryResponseModelList) {
-        this.categoryResponseModelList = categoryResponseModelList;
+    public MealCategoryAdapter( List<MealCategoryModel> mealCategoryModelList) {
+        this.mealCategoryModelList = mealCategoryModelList;
     }
 
     @NonNull
@@ -40,22 +38,22 @@ public class MealCategoryAdapter extends RecyclerView.Adapter<MealCategoryAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         context = holder.itemView.getContext();
-        final CategoryResponseModel categoryResponseModel = categoryResponseModelList.get(position);
-        if (!TextUtils.isEmpty(categoryResponseModel.getName())){
-            holder.food_category_title.setText(categoryResponseModel.getName());
+        final MealCategoryModel mealCategoryModel = mealCategoryModelList.get(position);
+        if (!TextUtils.isEmpty(mealCategoryModel.getName())){
+            holder.food_category_title.setText(mealCategoryModel.getName());
         }
-        if (!TextUtils.isEmpty(categoryResponseModel.getImages())){
-            GlideApp.with(context).load(categoryResponseModel.getImages()).into(holder.food_category_image);
+        if (!TextUtils.isEmpty(mealCategoryModel.getImages())){
+            GlideApp.with(context).load(mealCategoryModel.getImages()).into(holder.food_category_image);
         } else{
             holder.food_category_image.setImageResource(R.drawable.aalu);
         }
-        holder.food_category_adapter_layout.setTag(categoryResponseModel);
+        holder.food_category_adapter_layout.setTag(mealCategoryModel);
 
     }
 
     @Override
     public int getItemCount() {
-        return categoryResponseModelList.size();
+        return mealCategoryModelList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

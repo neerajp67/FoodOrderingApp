@@ -1,20 +1,20 @@
 package com.adverse.foodorderingapp.models;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MealCategoriesResponseModel {
-
+public class MealCategoryProductResponseModel {
     @SerializedName("errorMsg")
     @Expose
     private String errorMsg;
     @SerializedName("errorStatus")
     @Expose
     private Boolean errorStatus;
-    @SerializedName("categoryList")
+    @SerializedName("ProductList")
     @Expose
-    private List<MealCategoryModel> categoryList = null;
+    private List<MealCategoryProductModel> productList = null;
 
     public String getErrorMsg() {
         return errorMsg;
@@ -32,12 +32,13 @@ public class MealCategoriesResponseModel {
         this.errorStatus = errorStatus;
     }
 
-    public List<MealCategoryModel> getCategoryList() {
-        return categoryList;
+    public List<MealCategoryProductModel> getProductList() {
+        return productList;
     }
 
-    public void setCategoryList(List<MealCategoryModel> categoryList) {
-        this.categoryList = categoryList;
+    public void setProductList(List<MealCategoryProductModel> productList) {
+        this.productList = productList;
     }
 
 }
+
