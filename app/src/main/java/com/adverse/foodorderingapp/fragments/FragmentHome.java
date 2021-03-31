@@ -1,18 +1,31 @@
 package com.adverse.foodorderingapp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adverse.foodorderingapp.R;
+import com.adverse.foodorderingapp.activities.LoginActivity;
+import com.adverse.foodorderingapp.activities.MainActivity;
+import com.adverse.foodorderingapp.adapter.MealCategoryAdapter;
+import com.adverse.foodorderingapp.api.RetrofitClient;
+import com.adverse.foodorderingapp.models.CategoryResponseModel;
+import com.adverse.foodorderingapp.models.LoginResponse;
+import com.adverse.foodorderingapp.models.MealCategoriesResponseModel;
+import com.adverse.foodorderingapp.utils.OnRecyclerViewItemClickListener;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -20,12 +33,16 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentHome extends Fragment {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class FragmentHome extends Fragment implements OnRecyclerViewItemClickListener{
 
     //    to get Activity/Application Context
     Context context;
-
-    RecyclerView recyclerView;
+    private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
+    RecyclerView recyclerViewHorizontal, recyclerViewVertical;
 
     //    this is called when fragment is created, context need to be initialized, otherwise it may throw null exception..
     @Override
@@ -43,11 +60,12 @@ public class FragmentHome extends Fragment {
 //        getting fragment layout file to be rendered
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         //        getting fragment layout's recycler view where content will be displayed
-        recyclerView = (RecyclerView) view.findViewById(R.id.home_Horizontal_recyclerView1);
+        recyclerViewHorizontal = (RecyclerView) view.findViewById(R.id.home_Horizontal_recyclerView1);
+        recyclerViewVertical = (RecyclerView) view.findViewById(R.id.home_vertical_recyclerView1);
 
 //        defining layout manager to manage recycler view's items rendering from adapter'
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerViewVertical.setLayoutManager(linearLayoutManager);
 
 //        ImageSlider
         List<SlideModel> slideModels = new ArrayList<>();
@@ -64,6 +82,57 @@ public class FragmentHome extends Fragment {
 //        Api request
         // TODO: 3/18/2021 : create api request response functionality here
 
+        Call<MealCategoriesResponseModel> call = RetrofitClient.getInstance().getApi().getMealCategory();
+        call.enqueue(new Callback<MealCategoriesResponseModel>() {
+            @Override
+            public void onResponse(Call<MealCategoriesResponseModel> call, Response<MealCategoriesResponseModel> response) {
+                try {
+                    if (String.valueOf(response.code()).equals("200")) {
+                        Log.i("Response ", response.toString());
+                        List<CategoryResponseModel> categoryResponseModelList = response.body().getCategoryList();
+                        if (categoryResponseModelList.size() > 0) {
+                            final MealCategoryAdapter mealCategoryAdapter = new MealCategoryAdapter(categoryResponseModelList);
+                            mealCategoryAdapter.setOnRecyclerViewItemClickListener(FragmentHome.this);
+                            recyclerViewVertical.setAdapter(mealCategoryAdapter);
+                            // progressDialog.dismiss();
+                            // getActivity().setTitle("Top headlines");
+                        } else {
+                            Log.i("Response ", "Error");
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show();
+                }
+                // sharedPreferences.edit().putString("access_token", response.body().getAccessToken()).apply();
+                //  startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                // finish();
+
+            }
+
+            @Override
+            public void onFailure(Call<MealCategoriesResponseModel> call, Throwable t) {
+                //   Toast.makeText(LoginActivity.this, "Error " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("Error: ", t.getMessage());
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onItemClick(int adapterPosition, View view) {
+        switch (view.getId()) {
+            case R.id.food_category_adapter_layout:
+                CategoryResponseModel categoryResponseModel = (CategoryResponseModel) view.getTag();
+                if (!TextUtils.isEmpty(categoryResponseModel.getName())) {
+                    Log.e("clicked category", categoryResponseModel.getName());
+                    Toast.makeText(context, "Selected :" + categoryResponseModel.getName(), Toast.LENGTH_SHORT).show();
+                   // Intent webActivity = new Intent(context, WebActivity.class);
+                    //webActivity.putExtra("url", article.getUrl());
+                   // startActivity(webActivity);
+                }
+                break;
+        }
     }
 }

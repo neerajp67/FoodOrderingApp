@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             sharedPreferences.edit().putString("access_token", response.body().getAccessToken()).apply();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
 
                         } else {
                             Log.i("Response ", "Error");
@@ -96,7 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                                 String userPhone = resetPhone.getText().toString();
                                 if (TextUtils.isEmpty(userPhone)) {
                                     resetPhone.setError("Please enter your registered mobile number");
-                                    Toast.makeText(LoginActivity.this, "Please enter your registered mobile number!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Please enter your registered mobile number!",
+                                            Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                                 Toast.makeText(LoginActivity.this, "reset test", Toast.LENGTH_SHORT).show();
