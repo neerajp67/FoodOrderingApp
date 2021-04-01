@@ -57,10 +57,10 @@ public class MealCategoryProductAdapter extends RecyclerView.Adapter<MealCategor
            holder.food_item_title.setText(mealCategoryProductModel.getTitle());
         }
         if (!TextUtils.isEmpty(mealCategoryProductModel.getLowPrice())){
-            holder.food_item_price.setText(mealCategoryProductModel.getLowPrice());
+            holder.food_item_price.setText("₹" + mealCategoryProductModel.getLowPrice());
         }
         if (!TextUtils.isEmpty(mealCategoryProductModel.getHighPrice())){
-            holder.food_item_max_price.setText(mealCategoryProductModel.getHighPrice());
+            holder.food_item_max_price.setText("₹" + mealCategoryProductModel.getHighPrice());
         }
         if (!TextUtils.isEmpty(mealCategoryProductModel.getDetail())){
             holder.food_item_description.setText(mealCategoryProductModel.getDetail());

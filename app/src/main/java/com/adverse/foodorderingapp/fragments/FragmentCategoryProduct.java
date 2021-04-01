@@ -61,11 +61,12 @@ public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewI
         food_by_category_recyclerView.setLayoutManager(linearLayoutManager);
 //
         Bundle bundle = getArguments();
-        String category = getArguments().getString("mealCategoryCode");
-        Log.e("fragment product", category);
+        String mealCategoryCode = getArguments().getString("mealCategoryCode");
+        String mealCategoryName = getArguments().getString("mealCategoryName");
+        Log.e("fragment product", mealCategoryCode);
 
 //        String category = "Categories03302021124149";
-        Call<MealCategoryProductResponseModel> call = RetrofitClient.getInstance().getApi().getProductByCategory(category);
+        Call<MealCategoryProductResponseModel> call = RetrofitClient.getInstance().getApi().getProductByCategory(mealCategoryCode);
         call.enqueue(new Callback<MealCategoryProductResponseModel>() {
             @Override
             public void onResponse(Call<MealCategoryProductResponseModel> call, Response<MealCategoryProductResponseModel> response) {
@@ -77,8 +78,7 @@ public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewI
                             final MealCategoryProductAdapter mealCategoryProductAdapter = new MealCategoryProductAdapter(mealCategoryModelList);
                             mealCategoryProductAdapter.setOnRecyclerViewItemClickListener(FragmentCategoryProduct.this);
                             food_by_category_recyclerView.setAdapter(mealCategoryProductAdapter);
-                            // progressDialog.dismiss();
-                            // getActivity().setTitle("Top headlines");
+                            getActivity().setTitle(mealCategoryName);
                         } else {
                             Log.i("Response ", "Error");
                         }
@@ -87,9 +87,6 @@ public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewI
                     e.printStackTrace();
                     Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show();
                 }
-                // sharedPreferences.edit().putString("access_token", response.body().getAccessToken()).apply();
-                //  startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                // finish();
 
             }
 

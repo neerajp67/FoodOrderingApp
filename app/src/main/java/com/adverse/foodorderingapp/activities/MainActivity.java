@@ -4,17 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
 import androidx.core.app.ShareCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -22,8 +19,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adverse.foodorderingapp.R;
@@ -31,20 +26,21 @@ import com.adverse.foodorderingapp.fragments.FragmentHome;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     //    Define global variable here
     androidx.appcompat.widget.Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigation;
-    Button btn1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        rendering default fragment on application startup
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
 
 //        Initialize variables here
 
@@ -64,14 +60,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     case R.id.cart_view:
                         Toast.makeText(MainActivity.this, "Bottom Nav cart_view selected", Toast.LENGTH_SHORT).show();
                         return true;
-                    case R.id.search:
-                        Toast.makeText(MainActivity.this, "Bottom Nav search selected", Toast.LENGTH_SHORT).show();
-                        return true;
                     case R.id.account:
                         Toast.makeText(MainActivity.this, "Bottom Nav account selected", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.login:
-                        Toast.makeText(MainActivity.this, "Bottom Nav login selected", Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return true;
@@ -97,54 +87,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-//        rendering default fragment on application startup
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
-
 //            selected fragment will be highlighted
-            navigationView.setCheckedItem(R.id.item1);
+            navigationView.setCheckedItem(R.id.side_nav_home);
         }
-
-/*
-
-        Spinner spinner =findViewById(R.id.spinner1);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.numbers, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-*/
-
-
-
     }
 
     //    Navigation Drawer: add functionality on navigation drawer item click..
     public boolean itemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.item1:
-                Toast.makeText(MainActivity.this, "Item 1 selected", Toast.LENGTH_SHORT).show();
+            case R.id.side_nav_home:
+                Toast.makeText(MainActivity.this, "side_nav_home selected", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                 break;
-            case R.id.item2:
-                Toast.makeText(MainActivity.this, "Item 2 selected", Toast.LENGTH_SHORT).show();
+            case R.id.side_nav_about:
+                Toast.makeText(MainActivity.this, "side_nav_about selected", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                 break;
-            case R.id.item3:
-                Toast.makeText(MainActivity.this, "Item 3 selected", Toast.LENGTH_SHORT).show();
+            case R.id.side_nav_favourite:
+                Toast.makeText(MainActivity.this, "side_nav_favouriteselected", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                 break;
-            case R.id.item4:
-                Toast.makeText(MainActivity.this, "Item 4 selected", Toast.LENGTH_SHORT).show();
+            case R.id.side_nav_payments:
+                Toast.makeText(MainActivity.this, "side_nav_payments selected", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                 break;
-            case R.id.item5:
+
+            case R.id.side_nav_setting:
 //                rendering selected fragment based on Navigation drawer menu item's id
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                 break;
-            case R.id.item6:
-                Toast.makeText(MainActivity.this, "Item 6 selected", Toast.LENGTH_SHORT).show();
+            case R.id.side_nav_notifications:
+                Toast.makeText(MainActivity.this, "side_nav_notifications selected", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                 break;
-            case R.id.test1:
+            case R.id.side_nav_share:
                 ShareCompat.IntentBuilder.from(MainActivity.this)
                         .setType("text/plain")
                         .setChooserTitle("News Reader")
@@ -198,10 +174,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onOptionsItemSelected(item);
         return item.getItemId() == R.id.search_keyword;
     }
-   public void FoodDesc(View view)
-   {
-
-   }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adverse.foodorderingapp.R;
 import com.adverse.foodorderingapp.adapter.MealCategoryAdapter;
+import com.adverse.foodorderingapp.adapter.MealTypeAdapter;
 import com.adverse.foodorderingapp.api.RetrofitClient;
 import com.adverse.foodorderingapp.models.MealCategoryModel;
 import com.adverse.foodorderingapp.models.MealCategoriesResponseModel;
@@ -61,6 +62,8 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
 //        defining layout manager to manage recycler view's items rendering from adapter'
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recyclerViewVertical.setLayoutManager(linearLayoutManager);
+        final LinearLayoutManager linearLayoutManagerHorizontal = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewHorizontal.setLayoutManager(linearLayoutManagerHorizontal);
 
 //        ImageSlider
         List<SlideModel> slideModels = new ArrayList<>();
@@ -89,6 +92,10 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
                             final MealCategoryAdapter mealCategoryAdapter = new MealCategoryAdapter(mealCategoryModelList);
                             mealCategoryAdapter.setOnRecyclerViewItemClickListener(FragmentHome.this);
                             recyclerViewVertical.setAdapter(mealCategoryAdapter);
+
+                            final MealTypeAdapter mealTypeAdapter = new MealTypeAdapter(mealCategoryModelList);
+                            mealTypeAdapter.setOnRecyclerViewItemClickListener(FragmentHome.this);
+                            recyclerViewHorizontal.setAdapter(mealTypeAdapter);
                             // progressDialog.dismiss();
                             // getActivity().setTitle("Top headlines");
                         } else {
@@ -119,6 +126,7 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
     public void onItemClick(int adapterPosition, View view) {
         switch (view.getId()) {
             case R.id.food_category_adapter_layout:
+            case R.id.food_type_linear_layout:
                 MealCategoryModel mealCategoryModel = (MealCategoryModel) view.getTag();
 
                 if (!TextUtils.isEmpty(mealCategoryModel.getCode())) {
@@ -129,10 +137,12 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
                     String backStackFragmentCategoryProduct = fragmentCategoryProduct.getClass().getName();
                     Bundle b = new Bundle();
                     b.putString("mealCategoryCode", mealCategoryModel.getCode());
+                    b.putString("mealCategoryName", mealCategoryModel.getName());
                     fragmentCategoryProduct.setArguments(b);
                     t.replace(R.id.fragment_container, fragmentCategoryProduct).addToBackStack(backStackFragmentCategoryProduct).commit();
                 }
                 break;
+
         }
     }
 }
