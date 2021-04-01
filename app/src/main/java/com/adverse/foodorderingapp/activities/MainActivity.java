@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.adverse.foodorderingapp.R;
 import com.adverse.foodorderingapp.fragments.FragmentHome;
+import com.adverse.foodorderingapp.fragments.FragmentUserProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -56,12 +57,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 switch (item.getItemId()) {
                     case R.id.menu_home:
                         Toast.makeText(MainActivity.this, "Bottom Nav home selected", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                         return true;
                     case R.id.cart_view:
                         Toast.makeText(MainActivity.this, "Bottom Nav cart_view selected", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.account:
                         Toast.makeText(MainActivity.this, "Bottom Nav account selected", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentUserProfile()).commit();
                         return true;
                 }
                 return true;

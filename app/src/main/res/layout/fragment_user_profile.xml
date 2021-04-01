@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:id="@+id/user_profile_ll">
+
+    <ImageView
+        android:id="@+id/edit_user_image_view_button"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_edit"
+        android:layout_margin="8dp"/>
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="80dp"
+        android:elevation="10dp"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:id="@+id/user_profile_picture"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_person"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Neeraj Pandey"
+        android:layout_margin="5dp"
+        android:textSize="34sp"/>
+
+    <TextView
+        android:id="@+id/user_mobile_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="+91 9012218681"
+        android:layout_margin="5dp"
+        android:textSize="22sp"/>
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="neerajpandey025@gmail.com"
+        android:layout_margin="5dp"
+        android:textSize="22sp"/>
+    <TextView
+        android:id="@+id/user_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Male 24"
+        android:layout_margin="5dp"
+        android:textSize="22sp"/>
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Logout"
+        android:layout_marginTop="20dp"/>
+</LinearLayout>
