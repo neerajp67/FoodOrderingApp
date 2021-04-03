@@ -4,10 +4,10 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/side_nav_home"
-            android:icon="@drawable/ic_home_black"
-            android:title="Home" />
+<!--        <item-->
+<!--            android:id="@+id/side_nav_home"-->
+<!--            android:icon="@drawable/ic_home_black"-->
+<!--            android:title="Home" />-->
 
         <item
             android:id="@+id/side_nav_favourite"

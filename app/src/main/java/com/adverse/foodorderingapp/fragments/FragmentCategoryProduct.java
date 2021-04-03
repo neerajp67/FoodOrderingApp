@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -105,11 +106,12 @@ public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewI
     public void onItemClick(int adapterPosition, View view) {
         switch (view.getId()) {
             case R.id.food_item_adapter_layout:
-                MealCategoryModel mealCategoryModel = (MealCategoryModel) view.getTag();
-                if (!TextUtils.isEmpty(mealCategoryModel.getName())) {
-                    Log.e("clicked category", mealCategoryModel.getName());
-//                    Toast.makeText(context, "Selected :" + mealCategoryModel.getName(), Toast.LENGTH_SHORT).show();
-//                    Bundle b = new Bundle();
+                MealCategoryProductModel mealCategoryModel = (MealCategoryProductModel) view.getTag();
+                if (!TextUtils.isEmpty(mealCategoryModel.getTitle())) {
+                    Log.e("clicked category", mealCategoryModel.getTitle());
+                    FragmentTransaction t = this.getFragmentManager().beginTransaction();
+                    Fragment fragment = new FragmentCart();
+                    t.replace(R.id.fragment_container, fragment).commit();
                 }
                 break;
         }

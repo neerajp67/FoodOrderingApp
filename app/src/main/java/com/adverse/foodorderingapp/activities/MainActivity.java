@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.adverse.foodorderingapp.R;
+import com.adverse.foodorderingapp.fragments.FragmentCart;
 import com.adverse.foodorderingapp.fragments.FragmentHome;
 import com.adverse.foodorderingapp.fragments.FragmentUserProfile;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -59,10 +60,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Toast.makeText(MainActivity.this, "Bottom Nav home selected", Toast.LENGTH_SHORT).show();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
                         return true;
-                    case R.id.cart_view:
-                        Toast.makeText(MainActivity.this, "Bottom Nav cart_view selected", Toast.LENGTH_SHORT).show();
+                    case R.id.menu_cart:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentCart()).commit();
                         return true;
-                    case R.id.account:
+                    case R.id.menu_account:
                         Toast.makeText(MainActivity.this, "Bottom Nav account selected", Toast.LENGTH_SHORT).show();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentUserProfile()).commit();
                         return true;
@@ -91,17 +92,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         toggle.syncState();
 
 //            selected fragment will be highlighted
-            navigationView.setCheckedItem(R.id.side_nav_home);
+//            navigationView.setCheckedItem(R.id.side_nav_home);
         }
     }
 
     //    Navigation Drawer: add functionality on navigation drawer item click..
     public boolean itemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.side_nav_home:
-                Toast.makeText(MainActivity.this, "side_nav_home selected", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
-                break;
+//            case R.id.side_nav_home:
+//                Toast.makeText(MainActivity.this, "side_nav_home selected", Toast.LENGTH_SHORT).show();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
+//                break;
             case R.id.side_nav_about:
                 Toast.makeText(MainActivity.this, "side_nav_about selected", Toast.LENGTH_SHORT).show();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
