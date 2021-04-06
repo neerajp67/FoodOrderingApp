@@ -25,15 +25,20 @@ import com.adverse.foodorderingapp.models.MealCategoriesResponseModel;
 import com.adverse.foodorderingapp.models.MealCategoryModel;
 import com.adverse.foodorderingapp.models.MealCategoryProductModel;
 import com.adverse.foodorderingapp.models.MealCategoryProductResponseModel;
+import com.adverse.foodorderingapp.models.SaveToCartResponse;
 import com.adverse.foodorderingapp.utils.OnRecyclerViewItemClickListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewItemClickListener, OnBackPressed {
+public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewItemClickListener {
     //    to get Activity/Application Context
     Context context;
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
@@ -107,18 +112,35 @@ public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewI
         switch (view.getId()) {
             case R.id.food_item_adapter_layout:
                 MealCategoryProductModel mealCategoryModel = (MealCategoryProductModel) view.getTag();
-                if (!TextUtils.isEmpty(mealCategoryModel.getTitle())) {
-                    Log.e("clicked category", mealCategoryModel.getTitle());
-                    FragmentTransaction t = this.getFragmentManager().beginTransaction();
-                    Fragment fragment = new FragmentCart();
-                    t.replace(R.id.fragment_container, fragment).commit();
+                if (!TextUtils.isEmpty(mealCategoryModel.getProductTypeCod())) {
+                    Log.e("clicked category", mealCategoryModel.getProductTypeCod());
+                }
+
+                try {
+                    JSONObject productDetail = new JSONObject();
+                    productDetail.put("ProductCode", mealCategoryModel.getProductTypeCod());
+                    productDetail.put("Quantity", 10);
+                    Log.i("json", productDetail.toString());
+                    Call<SaveToCartResponse> addToCartCall = RetrofitClient.getInstance().getApi().addToCart(productDetail);
+                    addToCartCall.enqueue(new Callback<SaveToCartResponse>() {
+                        @Override
+                        public void onResponse(Call<SaveToCartResponse> call, Response<SaveToCartResponse> response) {
+                            Log.i("Response ", response.toString());
+                            Log.i("json on response", productDetail.toString());
+                            Log.i("Response test", response.body().toString());
+                            Log.i("errorMsg", response.body().getErrorMsg());
+                            Toast.makeText(context, "errorMsg" + response.body().getErrorMsg(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<SaveToCartResponse> call, Throwable t) {
+                            Log.i("error ", "failed..");
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
                 break;
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-
     }
 }

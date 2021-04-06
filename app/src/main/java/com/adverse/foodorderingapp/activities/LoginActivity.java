@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgetPassword;
     Button buttonLogin;
     SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +40,12 @@ public class LoginActivity extends AppCompatActivity {
         forgetPassword = findViewById(R.id.forgetPassword);
 
         sharedPreferences = getApplicationContext().getSharedPreferences("com.adverse.foodorderingapp", Context.MODE_PRIVATE);
-        String accessToken = null;
-       try{
-           accessToken =  sharedPreferences.getString("access_token", "default token");
-       } catch (Exception e){
-           Log.e("Error ", "No access token");
-       }
-       if (!accessToken.isEmpty()){
-           startActivity(new Intent(LoginActivity.this, MainActivity.class));
-           finish();
-       }
+        String accessToken =  sharedPreferences.getString("access_token","");;
+        if (!accessToken.equals("") || !accessToken.isEmpty()) {
+            Log.i("Access Token", accessToken);
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +53,19 @@ public class LoginActivity extends AppCompatActivity {
                 //for demo
                 String username = "admin";
                 String password = "admin";
+
+//                if (TextUtils.isEmpty(username)){
+//                    etLoginMobileNumber.setError("Please enter a valid username");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(password)){
+//                    etPassword.setError("Please enter your password");
+//                    return;
+//                }
+//                if (password.length()<6){
+//                    etPassword.setError("Invalid Password!");
+//                    return;
+//                }
 
                 //actual code
 //                String username = etLoginMobileNumber.getText().toString();
@@ -72,10 +82,16 @@ public class LoginActivity extends AppCompatActivity {
                             Log.i("Response ", response.toString());
                             Log.i("loginResponse", response.body().getAccessToken());
 
-                            sharedPreferences.edit().putString("access_token", response.body().getAccessToken()).apply();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            if (!TextUtils.isEmpty(response.body().getAccessToken())){
+                                editor.putString("access_token", response.body().getAccessToken());
+                                editor.putString("token_type", response.body().getTokenType());
+                                editor.commit();
+                                Log.i("Access Token saved", sharedPreferences.getString("access_token",""));
+                            }
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
-
+                            //sharedPreferences.edit().putString("access_token", response.body().getAccessToken()).apply();
                         } else {
                             Log.i("Response ", "Error");
                         }
@@ -87,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("Error: ", t.getMessage());
                     }
                 });
-
             }
         });
 

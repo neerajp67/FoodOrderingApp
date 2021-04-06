@@ -48,7 +48,6 @@ public class MealCategoryAdapter extends RecyclerView.Adapter<MealCategoryAdapte
             holder.food_category_image.setImageResource(R.drawable.aalu);
         }
         holder.food_category_adapter_layout.setTag(mealCategoryModel);
-
     }
 
     @Override

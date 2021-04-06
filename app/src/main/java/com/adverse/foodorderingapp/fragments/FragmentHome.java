@@ -1,6 +1,5 @@
 package com.adverse.foodorderingapp.fragments;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -76,7 +75,6 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
         ImageSlider imageSlider = view.findViewById(R.id.image_slider);
         imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
-
 //        Api request
         // TODO: 3/18/2021 : create api request response functionality here
 
@@ -109,7 +107,6 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
                 // sharedPreferences.edit().putString("access_token", response.body().getAccessToken()).apply();
                 //  startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 // finish();
-
             }
 
             @Override
@@ -118,7 +115,6 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
                 Log.i("Error: ", t.getMessage());
             }
         });
-
         return view;
     }
 
@@ -142,7 +138,6 @@ public class FragmentHome extends Fragment implements OnRecyclerViewItemClickLis
                     t.replace(R.id.fragment_container, fragmentCategoryProduct).addToBackStack(backStackFragmentCategoryProduct).commit();
                 }
                 break;
-
         }
     }
 }

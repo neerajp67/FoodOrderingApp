@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -76,6 +77,7 @@ public class MealCategoryProductAdapter extends RecyclerView.Adapter<MealCategor
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView food_item_title, food_item_price, food_item_max_price, food_item_description;
         private ImageView food_item_image, food_item_meal_type;
+        Button food_item_add_to_cart_button;
         private LinearLayout food_item_adapter_layout;
         ViewHolder(View view) {
             super(view);
@@ -88,15 +90,26 @@ public class MealCategoryProductAdapter extends RecyclerView.Adapter<MealCategor
             food_item_image = view.findViewById(R.id.food_item_image);
             food_item_meal_type = view.findViewById(R.id.food_item_meal_type);
             food_item_adapter_layout = view.findViewById(R.id.food_item_adapter_layout);
+            food_item_add_to_cart_button = view.findViewById(R.id.food_item_add_to_cart_button);
 
-            food_item_adapter_layout.setOnClickListener(new View.OnClickListener() {
+            food_item_add_to_cart_button.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
+                  //  onRecyclerViewItemClickListener.onItemClick(getAdapterPosition(), view);
                     if (onRecyclerViewItemClickListener != null) {
                         onRecyclerViewItemClickListener.onItemClick(getAdapterPosition(), view);
                     }
                 }
             });
+
+//            food_item_adapter_layout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if (onRecyclerViewItemClickListener != null) {
+//                        onRecyclerViewItemClickListener.onItemClick(getAdapterPosition(), view);
+//                    }
+//                }
+//            });
         }
     }
 

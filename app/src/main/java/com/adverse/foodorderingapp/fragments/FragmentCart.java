@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentCart extends Fragment implements OnRecyclerViewItemClickListener, OnBackPressed {
+public class FragmentCart extends Fragment implements OnRecyclerViewItemClickListener{
     //    to get Activity/Application Context
     Context context;
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
@@ -122,8 +122,4 @@ public class FragmentCart extends Fragment implements OnRecyclerViewItemClickLis
         }
     }
 
-    @Override
-    public void onBackPressed() {
-
-    }
 }

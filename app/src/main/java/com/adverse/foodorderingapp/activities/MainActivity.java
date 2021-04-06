@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+String accessToken= "IiLmOHmlNNfEt2tix6OAI3I2BHrvFQ7ofq5dmhV3E5-LBUe0anExk6CwWq-_Qy0GaOLOBGxsvNqbOW_DvCFhR5dQkZApMbf014vHisQqBy0ZnFzwWi0C78SL8AdyA_-pNPTAOnXVBsAwSwaWD2p4o62KKqXbtRZWd6PZZF5VzipTFMkOWqiM8LgA_HTh7aX8_N7hPicQGFycMRV2C8737SnUjdC3BTXgHzSvlHpLsFttyhfy6FNW_5_fVxv-gZhRDbhG3xLaZo-ErUXDruT9eqr8syZvkzFTaqLaSXp6jdk";
 //        rendering default fragment on application startup
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentHome()).commit();
