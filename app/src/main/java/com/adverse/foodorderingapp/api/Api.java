@@ -1,5 +1,6 @@
 package com.adverse.foodorderingapp.api;
 
+import com.adverse.foodorderingapp.models.CartListResponseModel;
 import com.adverse.foodorderingapp.models.LoginResponse;
 import com.adverse.foodorderingapp.models.MealCategoriesResponseModel;
 import com.adverse.foodorderingapp.models.MealCategoryProductResponseModel;
@@ -14,6 +15,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -32,6 +34,9 @@ public interface Api {
     Call<MealCategoryProductResponseModel> getProductByCategory(@Query("category") String category);
 
     @POST("api/meals/SaveToCart")
-    Call<SaveToCartResponse> addToCart(@Body JSONObject productDetail);
+    Call<SaveToCartResponse> addToCart(@Header("Authorization") String token, @Body JSONObject productDetail);
+
+    @POST("api/Meals/CartList")
+    Call<CartListResponseModel> getCartList(@Header("Authorization") String token);
 }
 

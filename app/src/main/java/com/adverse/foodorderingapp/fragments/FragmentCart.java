@@ -1,6 +1,7 @@
 package com.adverse.foodorderingapp.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,8 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adverse.foodorderingapp.R;
+import com.adverse.foodorderingapp.adapter.CartListAdapter;
 import com.adverse.foodorderingapp.adapter.MealCategoryProductAdapter;
 import com.adverse.foodorderingapp.api.RetrofitClient;
+import com.adverse.foodorderingapp.models.CartListModel;
+import com.adverse.foodorderingapp.models.CartListResponseModel;
 import com.adverse.foodorderingapp.models.MealCategoryModel;
 import com.adverse.foodorderingapp.models.MealCategoryProductModel;
 import com.adverse.foodorderingapp.models.MealCategoryProductResponseModel;
@@ -36,7 +40,7 @@ public class FragmentCart extends Fragment implements OnRecyclerViewItemClickLis
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
     RecyclerView cart_recyclerView;
     Button proceed_to_pay_button;
-
+    SharedPreferences sharedPreferences;
     //    this is called when fragment is created, context need to be initialized, otherwise it may throw null exception..
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,8 +55,11 @@ public class FragmentCart extends Fragment implements OnRecyclerViewItemClickLis
 
 //        getting fragment layout file to be rendered
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
+
+        sharedPreferences = context.getSharedPreferences("com.adverse.foodorderingapp",Context.MODE_PRIVATE);
+
         //        getting fragment layout's recycler view where content will be displayed
-       // cart_recyclerView = (RecyclerView) view.findViewById(R.id.cart_recyclerView);
+        cart_recyclerView = (RecyclerView) view.findViewById(R.id.cart_recyclerView);
         proceed_to_pay_button = view.findViewById(R.id.proceed_to_pay_button);
 
         proceed_to_pay_button.setOnClickListener(new View.OnClickListener() {
@@ -63,8 +70,8 @@ public class FragmentCart extends Fragment implements OnRecyclerViewItemClickLis
         });
 
 //        defining layout manager to manage recycler view's items rendering from adapter'
-//        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-//        cart_recyclerView.setLayoutManager(linearLayoutManager);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        cart_recyclerView.setLayoutManager(linearLayoutManager);
 //
 //        Bundle bundle = getArguments();
 //        String mealCategoryCode = "Categories03302021124149";;
@@ -72,37 +79,40 @@ public class FragmentCart extends Fragment implements OnRecyclerViewItemClickLis
 //        Log.e("fragment product", mealCategoryCode);
 
 //        String category = "Categories03302021124149";
-//        Call<MealCategoryProductResponseModel> call = RetrofitClient.getInstance().getApi().getProductByCategory(mealCategoryCode);
-//        call.enqueue(new Callback<MealCategoryProductResponseModel>() {
-//            @Override
-//            public void onResponse(Call<MealCategoryProductResponseModel> call, Response<MealCategoryProductResponseModel> response) {
-//                try {
-//                    if (String.valueOf(response.code()).equals("200")) {
-//                        Log.i("Response ", response.toString());
-//                        List<MealCategoryProductModel> mealCategoryModelList = response.body().getProductList();
-//                        if (mealCategoryModelList.size() > 0) {
-////                            final MealCategoryProductAdapter mealCategoryProductAdapter = new MealCategoryProductAdapter(mealCategoryModelList);
-////                            mealCategoryProductAdapter.setOnRecyclerViewItemClickListener(FragmentCart.this);
-////                            cart_recyclerView.setAdapter(mealCategoryProductAdapter);
-////                            getActivity().setTitle(mealCategoryName);
-//                            Log.i("Response ", "Success");
-//                        } else {
-//                            Log.i("Response ", "Error");
-//                        }
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(context, "Something went wrong!", Toast.LENGTH_LONG).show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MealCategoryProductResponseModel> call, Throwable t) {
-//                //   Toast.makeText(LoginActivity.this, "Error " + t.getMessage(), Toast.LENGTH_LONG).show();
-//                Log.i("Error: ", t.getMessage());
-//            }
-//        });
+        String access_token = "Bearer " + sharedPreferences.getString("access_token", "");
+        Log.i("access_token ", access_token);
+        Call<CartListResponseModel> call = RetrofitClient.getInstance().getApi().getCartList(access_token);
+        call.enqueue(new Callback<CartListResponseModel>() {
+            @Override
+            public void onResponse(Call<CartListResponseModel> call, Response<CartListResponseModel> response) {
+                try {
+                    if (String.valueOf(response.code()).equals("200")) {
+                        Log.i("Response ", response.toString());
+                        List<CartListModel> cartListModelList = response.body().getCartList();
+                        if (cartListModelList.size() > 0) {
+                            final CartListAdapter cartListAdapter = new CartListAdapter(cartListModelList);
+                            cartListAdapter.setOnRecyclerViewItemClickListener(FragmentCart.this);
+                            cart_recyclerView.setAdapter(cartListAdapter);
+//                            getActivity().setTitle(mealCategoryName);
+                            Log.i("Response ", "Success");
+                        } else {
+                            Log.i("Response ", "Error");
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.i("Error: ", e.toString());
+                    Toast.makeText(context, "Something went wrong!" + e.toString(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CartListResponseModel> call, Throwable t) {
+                   Toast.makeText(context, "Error " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("Error: ", t.getMessage());
+            }
+        });
 //
         return view;
 
@@ -112,11 +122,10 @@ public class FragmentCart extends Fragment implements OnRecyclerViewItemClickLis
     public void onItemClick(int adapterPosition, View view) {
         switch (view.getId()) {
             case R.id.cart_item_adapter_layout:
-                MealCategoryModel mealCategoryModel = (MealCategoryModel) view.getTag();
-                if (!TextUtils.isEmpty(mealCategoryModel.getName())) {
-                    Log.e("clicked category", mealCategoryModel.getName());
-//                    Toast.makeText(context, "Selected :" + mealCategoryModel.getName(), Toast.LENGTH_SHORT).show();
-//                    Bundle b = new Bundle();
+                CartListModel cartListModel = (CartListModel) view.getTag();
+                if (!TextUtils.isEmpty(cartListModel.getTitle())) {
+                    Log.e("clicked category", cartListModel.getTitle());
+                    Toast.makeText(context, "Selected :", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

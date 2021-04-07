@@ -1,6 +1,7 @@
 package com.adverse.foodorderingapp.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewI
     Context context;
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
     RecyclerView food_by_category_recyclerView;
+    SharedPreferences sharedPreferences;
 
     //    this is called when fragment is created, context need to be initialized, otherwise it may throw null exception..
     @Override
@@ -60,7 +62,7 @@ public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewI
         View view = inflater.inflate(R.layout.fragment_category_product, container, false);
         //        getting fragment layout's recycler view where content will be displayed
         food_by_category_recyclerView = (RecyclerView) view.findViewById(R.id.food_by_category_recyclerView);
-
+        sharedPreferences = context.getSharedPreferences("com.adverse.foodorderingapp", Context.MODE_PRIVATE);
 
 //        defining layout manager to manage recycler view's items rendering from adapter'
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
@@ -115,13 +117,14 @@ public class FragmentCategoryProduct extends Fragment implements OnRecyclerViewI
                 if (!TextUtils.isEmpty(mealCategoryModel.getProductTypeCod())) {
                     Log.e("clicked category", mealCategoryModel.getProductTypeCod());
                 }
+                String access_token = "Bearer " + sharedPreferences.getString("access_token", "");
 
                 try {
                     JSONObject productDetail = new JSONObject();
                     productDetail.put("ProductCode", mealCategoryModel.getProductTypeCod());
                     productDetail.put("Quantity", 10);
                     Log.i("json", productDetail.toString());
-                    Call<SaveToCartResponse> addToCartCall = RetrofitClient.getInstance().getApi().addToCart(productDetail);
+                    Call<SaveToCartResponse> addToCartCall = RetrofitClient.getInstance().getApi().addToCart(access_token, productDetail);
                     addToCartCall.enqueue(new Callback<SaveToCartResponse>() {
                         @Override
                         public void onResponse(Call<SaveToCartResponse> call, Response<SaveToCartResponse> response) {
